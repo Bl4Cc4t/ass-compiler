@@ -33,6 +33,7 @@ export function compileDialogues({ styles, dialogues }) {
         vertical: dia.MarginV || stl.MarginV,
       },
       effect: dia.Effect,
+      actor: dia.Name,
     }, compiledText, { alignment }));
   }
   for (let i = 0; i < results.length; i++) {

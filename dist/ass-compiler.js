@@ -196,6 +196,7 @@
         case 'End':
           dia[fmt] = parseTime(fld);
           break;
+        case "Name":
         case 'Effect':
           dia[fmt] = fld;
           break;
@@ -686,6 +687,7 @@
           vertical: dia.MarginV || stl.MarginV,
         },
         effect: dia.Effect,
+        actor: dia.Name,
       }, compiledText, { alignment: alignment }));
     }
     for (var i$1 = 0; i$1 < results.length; i$1++) {
