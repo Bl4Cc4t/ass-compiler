@@ -20,5 +20,5 @@ export function parseEffect(text) {
       fadeAwayHeight: param[4] * 1 || 0,
     };
   }
-  return null;
+  return text;
 }
