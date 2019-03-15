@@ -26,7 +26,7 @@ export function parseDialogue(text, format) {
         dia[fmt] = parseTime(fld);
         break;
       case 'Effect':
-        dia[fmt] = parseEffect(fld);
+        dia[fmt] = fld;
         break;
       case 'Text':
         dia[fmt] = parseText(fld);
