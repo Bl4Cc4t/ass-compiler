@@ -619,12 +619,12 @@
         clip = compileTag(tag$1, 'clip') || clip;
         var key = Object.keys(tag$1)[0];
         if (key && !~globalTags.indexOf(key)) {
-          var ref$2 = slice.tag;
+          var ref$2 = style[slice.style].tag;
           var c1 = ref$2.c1;
           var c2 = ref$2.c2;
           var c3 = ref$2.c3;
           var c4 = ref$2.c4;
-          var fs = prevTag.fs || slice.tag.fs;
+          var fs = prevTag.fs || style[slice.style].tag.fs;
           var compiledTag = compileTag(tag$1, key, { start: start, end: end, c1: c1, c2: c2, c3: c3, c4: c4, fs: fs });
           if (key === 't') {
             fragment.tag.t = fragment.tag.t || [];
