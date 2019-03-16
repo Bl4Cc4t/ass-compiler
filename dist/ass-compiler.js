@@ -665,10 +665,7 @@
       if (dia.Start >= dia.End) {
         continue;
       }
-      if (!styles[dia.Style]) {
-        dia.Style = 'Default';
-      }
-      var stl = styles[dia.Style].style;
+      var stl = styles[dia.Style] ? styles[dia.Style].style : styles["Default"].style;
       var compiledText = compileText({
         styles: styles,
         name: dia.Style,
