@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.assCompiler = {})));
-}(this, (function (exports) { 'use strict';
+  (global = global || self, factory(global.assCompiler = {}));
+}(this, function (exports) { 'use strict';
 
   function parseDrawing(text) {
     return text
@@ -173,7 +173,7 @@
     return t[0] * 3600 + t[1] * 60 + t[2] * 1;
   }
 
-  function parseDialogue(text, format) {
+  function parseDialogue(text, format, isComment) {
     var fields = text.split(',');
     if (fields.length > format.length) {
       var textField = fields.slice(format.length - 1).join();
@@ -181,7 +181,9 @@
       fields.push(textField);
     }
 
-    var dia = {};
+    var dia = {
+      isComment: isComment
+    };
     for (var i = 0; i < fields.length; i++) {
       var fmt = format[i];
       var fld = fields[i].trim();
@@ -261,7 +263,7 @@
           var ref$1 = line.match(/^(\w+?)\s*:\s*(.*)/i);
           var key$1 = ref$1[1];
           var value$1 = ref$1[2];
-          tree.events[key$1.toLowerCase()].push(parseDialogue(value$1, tree.events.format));
+          tree.events[dialogue].push(parseDialogue(value$1, tree.events.format, key$1 == "Comment" ? true : false));
         }
       }
     }
@@ -693,7 +695,7 @@
     for (var i$1 = 0; i$1 < results.length; i$1++) {
       results[i$1].layer -= minLayer;
     }
-    return results.sort(function (a, b) { return a.start - b.start || a.end - b.end; });
+    return results //results.sort((a, b) => a.start - b.start || a.end - b.end);
   }
 
   // same as Aegisub
@@ -848,4 +850,4 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));

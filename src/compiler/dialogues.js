@@ -39,5 +39,5 @@ export function compileDialogues({ styles, dialogues }) {
   for (let i = 0; i < results.length; i++) {
     results[i].layer -= minLayer;
   }
-  return results.sort((a, b) => a.start - b.start || a.end - b.end);
+  return results //results.sort((a, b) => a.start - b.start || a.end - b.end);
 }

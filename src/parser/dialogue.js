@@ -2,7 +2,7 @@ import { parseEffect } from './effect.js';
 import { parseText } from './text.js';
 import { parseTime } from './time.js';
 
-export function parseDialogue(text, format) {
+export function parseDialogue(text, format, isComment) {
   let fields = text.split(',');
   if (fields.length > format.length) {
     const textField = fields.slice(format.length - 1).join();
@@ -10,7 +10,9 @@ export function parseDialogue(text, format) {
     fields.push(textField);
   }
 
-  const dia = {};
+  const dia = {
+    isComment: isComment
+  }
   for (let i = 0; i < fields.length; i++) {
     const fmt = format[i];
     const fld = fields[i].trim();
