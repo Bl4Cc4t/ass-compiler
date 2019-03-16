@@ -690,6 +690,7 @@
         },
         effect: dia.Effect,
         actor: dia.Name,
+        isComment: dia.isComment
       }, compiledText, { alignment: alignment }));
     }
     for (var i$1 = 0; i$1 < results.length; i$1++) {

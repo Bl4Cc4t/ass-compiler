@@ -34,6 +34,7 @@ export function compileDialogues({ styles, dialogues }) {
       },
       effect: dia.Effect,
       actor: dia.Name,
+      isComment: dia.isComment
     }, compiledText, { alignment }));
   }
   for (let i = 0; i < results.length; i++) {
