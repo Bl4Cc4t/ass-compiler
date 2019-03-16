@@ -40,7 +40,7 @@ export function parse(text) {
       }
       if (/^(?:Comment|Dialogue)\s*:/i.test(line)) {
         const [, key, value] = line.match(/^(\w+?)\s*:\s*(.*)/i);
-        tree.events[dialogue].push(parseDialogue(value, tree.events.format, key == "Comment" ? true : false));
+        tree.events["dialogue"].push(parseDialogue(value, tree.events.format, key == "Comment" ? true : false));
       }
     }
   }
