@@ -571,9 +571,9 @@
 
   function createSlice(name, styles) {
     return {
-      name: name,
-      borderStyle: styles[name].style.BorderStyle,
-      tag: styles[name].tag,
+      style: name,
+      // borderStyle: styles[name].style.BorderStyle,
+      // tag: styles[name].tag,
       fragments: [],
     };
   }

@@ -12,9 +12,9 @@ const globalTags = ['r', 'a', 'an', 'pos', 'org', 'move', 'fade', 'fad', 'clip']
 
 function createSlice(name, styles) {
   return {
-    name,
-    borderStyle: styles[name].style.BorderStyle,
-    tag: styles[name].tag,
+    style: name,
+    // borderStyle: styles[name].style.BorderStyle,
+    // tag: styles[name].tag,
     fragments: [],
   };
 }
