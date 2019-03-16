@@ -665,9 +665,9 @@
       if (dia.Start >= dia.End) {
         continue;
       }
-      // if (!styles[dia.Style]) {
-      //   dia.Style = 'Default';
-      // }
+      if (!styles[dia.Style]) {
+        dia.Style = 'Default';
+      }
       var stl = styles[dia.Style].style;
       var compiledText = compileText({
         styles: styles,

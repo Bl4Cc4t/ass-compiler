@@ -9,9 +9,9 @@ export function compileDialogues({ styles, dialogues }) {
     if (dia.Start >= dia.End) {
       continue;
     }
-    // if (!styles[dia.Style]) {
-    //   dia.Style = 'Default';
-    // }
+    if (!styles[dia.Style]) {
+      dia.Style = 'Default';
+    }
     const stl = styles[dia.Style].style;
     const compiledText = compileText({
       styles,
