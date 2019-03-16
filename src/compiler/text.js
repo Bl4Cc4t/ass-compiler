@@ -51,8 +51,8 @@ export function compileText({ styles, name, parsed, start, end }) {
       clip = compileTag(tag, 'clip') || clip;
       const key = Object.keys(tag)[0];
       if (key && !~globalTags.indexOf(key)) {
-        const { c1, c2, c3, c4 } = slice.tag;
-        const fs = prevTag.fs || slice.tag.fs;
+        const { c1, c2, c3, c4 } = style[slice.style].tag;
+        const fs = prevTag.fs || style[slice.style].tag.fs;
         const compiledTag = compileTag(tag, key, { start, end, c1, c2, c3, c4, fs });
         if (key === 't') {
           fragment.tag.t = fragment.tag.t || [];
