@@ -263,7 +263,7 @@
           var ref$1 = line.match(/^(\w+?)\s*:\s*(.*)/i);
           var key$1 = ref$1[1];
           var value$1 = ref$1[2];
-          tree.events[dialogue].push(parseDialogue(value$1, tree.events.format, key$1 == "Comment" ? true : false));
+          tree.events["dialogue"].push(parseDialogue(value$1, tree.events.format, key$1 == "Comment" ? true : false));
         }
       }
     }
