@@ -665,9 +665,9 @@
       if (dia.Start >= dia.End) {
         continue;
       }
-      if (!styles[dia.Style]) {
-        dia.Style = 'Default';
-      }
+      // if (!styles[dia.Style]) {
+      //   dia.Style = 'Default';
+      // }
       var stl = styles[dia.Style].style;
       var compiledText = compileText({
         styles: styles,
@@ -684,9 +684,9 @@
         end: dia.End,
         // reset style by `\r` will not effect margin and alignment
         margin: {
-          left: dia.MarginL || stl.MarginL,
-          right: dia.MarginR || stl.MarginR,
-          vertical: dia.MarginV || stl.MarginV,
+          left: dia.MarginL, //|| stl.MarginL,
+          right: dia.MarginR, //|| stl.MarginR,
+          vertical: dia.MarginV //|| stl.MarginV,
         },
         effect: dia.Effect,
         actor: dia.Name,
