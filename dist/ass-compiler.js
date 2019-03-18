@@ -224,6 +224,7 @@
   function parse(text) {
     var tree = {
       info: {},
+      garbage: {},
       styles: { format: [], style: [] },
       events: { format: [], comment: [], dialogue: [] },
     };
@@ -233,10 +234,11 @@
       var line = lines[i].trim();
       if (/^;/.test(line)) { continue; }
 
-      if (/^\[Script Info\]/i.test(line)) { state = 1; }
-      else if (/^\[V4\+? Styles\]/i.test(line)) { state = 2; }
-      else if (/^\[Events\]/i.test(line)) { state = 3; }
-      else if (/^\[.*\]/.test(line)) { state = 0; }
+      if (/^\[Script Info\]/i.test(line))                   { state = 1; }
+      else if (/^\[Aegisub Project Garbage\]/i.test(line))  { state = 2; }
+      else if (/^\[V4\+? Styles\]/i.test(line))             { state = 3; }
+      else if (/^\[Events\]/i.test(line))                   { state = 4; }
+      else if (/^\[.*\]/.test(line))                        { state = 0; }
 
       if (state === 0) { continue; }
       if (state === 1) {
@@ -248,6 +250,14 @@
         }
       }
       if (state === 2) {
+        if (/:/.test(line)) {
+          var ref$1 = line.match(/(.*?)\s*:\s*(.*)/);
+          var key$1 = ref$1[1];
+          var value$1 = ref$1[2];
+          tree.garbage[key$1] = value$1;
+        }
+      }
+      if (state === 3) {
         if (/^Format\s*:/i.test(line)) {
           tree.styles.format = parseFormat(line);
         }
@@ -255,15 +265,15 @@
           tree.styles.style.push(parseStyle(line));
         }
       }
-      if (state === 3) {
+      if (state === 4) {
         if (/^Format\s*:/i.test(line)) {
           tree.events.format = parseFormat(line);
         }
         if (/^(?:Comment|Dialogue)\s*:/i.test(line)) {
-          var ref$1 = line.match(/^(\w+?)\s*:\s*(.*)/i);
-          var key$1 = ref$1[1];
-          var value$1 = ref$1[2];
-          tree.events["dialogue"].push(parseDialogue(value$1, tree.events.format, key$1 == "Comment" ? true : false));
+          var ref$2 = line.match(/^(\w+?)\s*:\s*(.*)/i);
+          var key$2 = ref$2[1];
+          var value$2 = ref$2[2];
+          tree.events["dialogue"].push(parseDialogue(value$2, tree.events.format, key$2 == "Comment" ? true : false));
         }
       }
     }
@@ -832,6 +842,7 @@
     });
     return {
       info: tree.info,
+      garbage: tree.garbage,
       width: tree.info.PlayResX * 1 || null,
       height: tree.info.PlayResY * 1 || null,
       collisions: tree.info.Collisions || 'Normal',

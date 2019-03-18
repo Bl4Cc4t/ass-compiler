@@ -5,6 +5,7 @@ import { parseStyle } from './style.js';
 export function parse(text) {
   const tree = {
     info: {},
+    garbage: {},
     styles: { format: [], style: [] },
     events: { format: [], comment: [], dialogue: [] },
   };
@@ -14,10 +15,11 @@ export function parse(text) {
     const line = lines[i].trim();
     if (/^;/.test(line)) continue;
 
-    if (/^\[Script Info\]/i.test(line)) state = 1;
-    else if (/^\[V4\+? Styles\]/i.test(line)) state = 2;
-    else if (/^\[Events\]/i.test(line)) state = 3;
-    else if (/^\[.*\]/.test(line)) state = 0;
+    if (/^\[Script Info\]/i.test(line))                   state = 1
+    else if (/^\[Aegisub Project Garbage\]/i.test(line))  state = 2
+    else if (/^\[V4\+? Styles\]/i.test(line))             state = 3
+    else if (/^\[Events\]/i.test(line))                   state = 4
+    else if (/^\[.*\]/.test(line))                        state = 0
 
     if (state === 0) continue;
     if (state === 1) {
@@ -27,6 +29,12 @@ export function parse(text) {
       }
     }
     if (state === 2) {
+      if (/:/.test(line)) {
+        const [, key, value] = line.match(/(.*?)\s*:\s*(.*)/)
+        tree.garbage[key] = value
+      }
+    }
+    if (state === 3) {
       if (/^Format\s*:/i.test(line)) {
         tree.styles.format = parseFormat(line);
       }
@@ -34,7 +42,7 @@ export function parse(text) {
         tree.styles.style.push(parseStyle(line));
       }
     }
-    if (state === 3) {
+    if (state === 4) {
       if (/^Format\s*:/i.test(line)) {
         tree.events.format = parseFormat(line);
       }

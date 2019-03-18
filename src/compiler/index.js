@@ -12,6 +12,7 @@ export function compile(text, options = {}) {
   });
   return {
     info: tree.info,
+    garbage: tree.garbage,
     width: tree.info.PlayResX * 1 || null,
     height: tree.info.PlayResY * 1 || null,
     collisions: tree.info.Collisions || 'Normal',
