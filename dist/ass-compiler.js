@@ -622,9 +622,9 @@
       for (var j$1 = 0; j$1 < tags.length; j$1++) {
         var tag$1 = tags[j$1];
         alignment = alignment || a2an[tag$1.a || 0] || tag$1.an;
-        pos = pos || compileTag(tag$1, 'pos');
+        pos = move ? move : pos || compileTag(tag$1, 'pos');
         org = org || compileTag(tag$1, 'org');
-        move = move || compileTag(tag$1, 'move');
+        move = pos ? pos : move || compileTag(tag$1, 'move');
         fade = fade || compileTag(tag$1, 'fade') || compileTag(tag$1, 'fad');
         clip = compileTag(tag$1, 'clip') || clip;
         var key = Object.keys(tag$1)[0];

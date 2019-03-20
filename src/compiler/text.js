@@ -44,9 +44,9 @@ export function compileText({ styles, name, parsed, start, end }) {
     for (let j = 0; j < tags.length; j++) {
       const tag = tags[j];
       alignment = alignment || a2an[tag.a || 0] || tag.an;
-      pos = pos || compileTag(tag, 'pos');
+      pos = move ? move : pos || compileTag(tag, 'pos');
       org = org || compileTag(tag, 'org');
-      move = move || compileTag(tag, 'move');
+      move = pos ? pos : move || compileTag(tag, 'move');
       fade = fade || compileTag(tag, 'fade') || compileTag(tag, 'fad');
       clip = compileTag(tag, 'clip') || clip;
       const key = Object.keys(tag)[0];
