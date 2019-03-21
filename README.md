@@ -59,3 +59,5 @@ compile(text, options);
 ```
 
 For details of data structure, please use the [online viewer](https://ass.js.org/ass-compiler/).
+
+For differences in this fork, see diffs.md
